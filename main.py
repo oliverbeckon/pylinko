@@ -2,7 +2,8 @@ from ball import Ball
 from board import *
 from multis import *
 from settings import *
-import ctypes, pygame, pymunk, random, sys, playerAtr
+import ctypes, pygame, pymunk, random, sys
+from playerAtr import *
 
 # Maintain resolution regardless of Windows scaling settings
 ctypes.windll.user32.SetProcessDPIAware()
@@ -11,8 +12,9 @@ class Game:
     def __init__(self):
         # General setup
         pygame.init()
+        pygame.font.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        playerAtr.init()
+        playerInit()
         pygame.display.set_caption(TITLE_STRING)
         self.clock = pygame.time.Clock()
         self.delta_time = 0
@@ -40,18 +42,18 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 # Spawn ball on left mouse button release
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and getMoney() >= 100:
+                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and getMoney() >= getBallValue():
                     
                     random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
                     click.play()
-                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, 100)
+                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
                     self.ball_group.add(self.ball)
                 
-                elif keys[pygame.K_SPACE] and getMoney() >= 100:
+                elif keys[pygame.K_SPACE] and getMoney() >= getBallValue():
                     
                     random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
                     click.play()
-                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, 100)
+                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
                     self.ball_group.add(self.ball)
                     
 

@@ -22,6 +22,8 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.Surface((BALL_RAD * 2, BALL_RAD * 2), pygame.SRCALPHA)
         self.rect = self.image.get_rect(topleft=(self.body.position.x, self.body.position.y))
 
+        self.font = pygame.font.SysFont('Comic Sans MS', 20)
+
         self.value = value
         
         addMoney(-value)
@@ -30,6 +32,9 @@ class Ball(pygame.sprite.Sprite):
         pos_x, pos_y = int(self.body.position.x), int(self.body.position.y)
         self.rect.centerx = pos_x
         self.rect.centery = pos_y
+
+        self.money_surface = self.font.render(f'{self.value}', True, (0,0,0))
+        
 
         # Check to see if ball hits obstacle
         for obstacle in self.board.obstacle_sprites:
@@ -63,3 +68,4 @@ class Ball(pygame.sprite.Sprite):
         
         # Draw red ball
         pygame.draw.circle(self.display_surface, (255, 0, 0), (pos_x, pos_y), BALL_RAD)
+        self.display_surface.blit(self.money_surface, (pos_x-10, pos_y-15))

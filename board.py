@@ -9,7 +9,6 @@ class Board():
     def __init__(self, space):
         self.space = space
         self.display_surface = pygame.display.get_surface()
-        pygame.font.init()
         self.font = pygame.font.SysFont('Comic Sans MS', 60)
 
         # Obstacles
