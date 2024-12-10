@@ -1,12 +1,16 @@
 from multis import *
 from obstacles import *
 from settings import *
+from playerAtr import getMoney
+from ball import Ball
 import pygame, pymunk
 
 class Board():
     def __init__(self, space):
         self.space = space
         self.display_surface = pygame.display.get_surface()
+        pygame.font.init()
+        self.font = pygame.font.SysFont('Comic Sans MS', 60)
 
         # Obstacles
         self.curr_row_count = 3
@@ -15,19 +19,6 @@ class Board():
         self.obstacle_sprites = pygame.sprite.Group()
         self.updated_coords = OBSTACLE_START
 
-        # Play button
-        self.play_up = pygame.image.load("graphics/play01.png").convert_alpha()
-        self.play_down = pygame.image.load("graphics/play02.png").convert_alpha()
-        self.pressing_play = False
-        self.play_orig_width = self.play_up.get_width()
-        self.play_orig_height = self.play_up.get_height()
-
-        # Scale the play image by 50%
-        self.play_scaled_width = self.play_orig_width // 2
-        self.play_scaled_height = self.play_orig_height // 2
-        self.scaled_play_up = pygame.transform.scale(self.play_up, (self.play_scaled_width, self.play_scaled_height))
-        self.scaled_play_down = pygame.transform.scale(self.play_down, (self.play_scaled_width, self.play_scaled_height))
-        self.play_rect = self.scaled_play_up.get_rect(center=(WIDTH / 6, HEIGHT / 2))
 
         # Get second point for segmentA
         self.segmentA_2 = OBSTACLE_START
@@ -98,6 +89,12 @@ class Board():
         segment_shape = pymunk.Segment(segment_body, pointA, pointB, 5) # radius = 5
         self.space.add(segment_body, segment_shape)
 
+
+    def draw_text(self):
+        self.money_surface = self.font.render(f'{getMoney()}$', False, (255,234,211))
+        self.display_surface.blit(self.money_surface, (200, 50))
+
+
     def update(self):
         self.draw_obstacles(self.obstacles_list)
         multi_group.draw(self.display_surface)
@@ -107,7 +104,4 @@ class Board():
         if len(list(animation_group)) > 0:
             animation_group.update()
         self.draw_prev_multi_mask()
-        if self.pressing_play:
-            self.display_surface.blit(self.scaled_play_down, (WIDTH // 16, HEIGHT // 3))
-        else:
-            self.display_surface.blit(self.scaled_play_up, (WIDTH // 16, HEIGHT // 3))
+        self.draw_text()

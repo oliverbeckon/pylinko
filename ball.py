@@ -1,10 +1,11 @@
 from multis import *
 from obstacles import *
 from settings import *
+from playerAtr import addMoney, getMoney
 import pygame, pymunk, random
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, pos, space, board, delta_time):
+    def __init__(self, pos, space, board, delta_time, value):
         super().__init__()
         self.display_surface = pygame.display.get_surface()
         self.space = space
@@ -20,6 +21,10 @@ class Ball(pygame.sprite.Sprite):
         self.space.add(self.body, self.shape)
         self.image = pygame.Surface((BALL_RAD * 2, BALL_RAD * 2), pygame.SRCALPHA)
         self.rect = self.image.get_rect(topleft=(self.body.position.x, self.body.position.y))
+
+        self.value = value
+        
+        addMoney(-value)
 
     def update(self):
         pos_x, pos_y = int(self.body.position.x), int(self.body.position.y)
@@ -45,8 +50,8 @@ class Ball(pygame.sprite.Sprite):
         for multi in multi_group:
             if pygame.sprite.collide_rect(self, multi):
                 multi.hit_sound()
-                multipliers[str(multi.multi_amt)] += 1
-                print(f"Total plays: {sum([val for val in multipliers.values()])} | {multipliers}")
+                
+                addMoney(self.value * multi.multi_amt)
                 multi.animate(multi.color, multi.multi_amt)
                 multi.is_animating = True
 
