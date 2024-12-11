@@ -68,4 +68,4 @@ class Ball(pygame.sprite.Sprite):
         
         # Draw red ball
         pygame.draw.circle(self.display_surface, (255, 0, 0), (pos_x, pos_y), BALL_RAD)
-        self.display_surface.blit(self.money_surface, (pos_x-10, pos_y-15))
+        #self.display_surface.blit(self.money_surface, (pos_x-10, pos_y-15))

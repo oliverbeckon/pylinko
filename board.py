@@ -1,7 +1,7 @@
 from multis import *
 from obstacles import *
 from settings import *
-from playerAtr import getMoney
+from playerAtr import *
 from ball import Ball
 import pygame, pymunk
 
@@ -92,6 +92,10 @@ class Board():
     def draw_text(self):
         self.money_surface = self.font.render(f'{getMoney()}$', False, (255,234,211))
         self.display_surface.blit(self.money_surface, (200, 50))
+
+
+        self.ballVal_surface = self.font.render(f'{getBallValue()}$', False, (255, 200, 211))
+        self.display_surface.blit(self.ballVal_surface, (200, 100))
 
 
     def update(self):

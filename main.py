@@ -41,21 +41,24 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                # Spawn ball on left mouse button release
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and getMoney() >= getBallValue():
+            
+                elif event.type == pygame.KEYDOWN:
+                    match event.key:
+                        case pygame.K_c:
+                            if getBallValue() < 200:
+                                setBallValue(getBallValue() + 5)
+                        case pygame.K_v:
+                            if getBallValue() > 5:
+                                setBallValue(getBallValue() - 5)
+                        case pygame.K_SPACE:
+                            if getMoney() > getBallValue():
+                                random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
+                                click.play()
+                                self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
+                                self.ball_group.add(self.ball)
+
                     
-                    random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
-                    click.play()
-                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
-                    self.ball_group.add(self.ball)
-                
-                elif keys[pygame.K_SPACE] and getMoney() >= getBallValue():
-                    
-                    random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
-                    click.play()
-                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
-                    self.ball_group.add(self.ball)
-                    
+
 
             self.screen.fill(BG_COLOR)
 
