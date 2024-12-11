@@ -5,7 +5,7 @@ FPS = 60
 
 # Game config
 STARTER_MONEY = 100
-STARTER_BALLVAL = 10
+STARTER_BALLVAL = 1
 
 
 

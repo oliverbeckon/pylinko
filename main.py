@@ -51,9 +51,16 @@ class Game:
                             if getBallValue() > 5:
                                 setBallValue(getBallValue() - 5)
                         case pygame.K_SPACE:
-                            if getMoney() > getBallValue():
+                            if getMoney() >= getBallValue():
                                 random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
                                 click.play()
+                                self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
+                                self.ball_group.add(self.ball)
+                        case pygame.K_b:
+                            self.ammount = round(getMoney() / getBallValue())
+                            click.play()
+                            for i in range(self.ammount):
+                                random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
                                 self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
                                 self.ball_group.add(self.ball)
 
