@@ -54,14 +54,6 @@ class Board():
             pygame.draw.circle(self.display_surface, (255, 255, 255), (pos_x, pos_y), OBSTACLE_RAD)
 
     # Used to give a border radius to previous multi display on right side
-    def draw_prev_multi_mask(self):
-        multi_mask_surface = pygame.Surface((WIDTH / 4, HEIGHT), pygame.SRCALPHA)
-        multi_mask_surface.fill(BG_COLOR)
-        right_side_of_board = (WIDTH / 16) * 13
-        right_side_pad = right_side_of_board / 130
-        mask_y = (HEIGHT / 4) + ((HEIGHT / 4) / 9)
-        pygame.draw.rect(multi_mask_surface, (0, 0, 0, 0), (right_side_pad, mask_y, SCORE_RECT, SCORE_RECT * 4), border_radius=30)
-        self.display_surface.blit(multi_mask_surface, (right_side_of_board, 0))
 
     def spawn_multis(self):
         self.multi_amounts = [val[1] for val in multi_rgb.keys()]
@@ -85,7 +77,7 @@ class Board():
 
     def spawn_segments(self, pointA, pointB, space):
         segment_body = pymunk.Body(body_type = pymunk.Body.STATIC)
-        segment_shape = pymunk.Segment(segment_body, pointA, pointB, 5) # radius = 5
+        segment_shape = pymunk.Segment(segment_body, pointA, pointB, 6) # radius = 5
         self.space.add(segment_body, segment_shape)
 
 
@@ -102,9 +94,6 @@ class Board():
         self.draw_obstacles(self.obstacles_list)
         multi_group.draw(self.display_surface)
         multi_group.update()
-        if len(list(prev_multi_group)) > 0:
-            prev_multi_group.update()
         if len(list(animation_group)) > 0:
             animation_group.update()
-        self.draw_prev_multi_mask()
         self.draw_text()

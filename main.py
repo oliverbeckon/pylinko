@@ -2,8 +2,9 @@ from ball import Ball
 from board import *
 from multis import *
 from settings import *
-import ctypes, pygame, pymunk, random, sys
+import ctypes, pygame, pymunk, random, sys, math
 from playerAtr import *
+
 
 # Maintain resolution regardless of Windows scaling settings
 ctypes.windll.user32.SetProcessDPIAware()
@@ -44,25 +45,19 @@ class Game:
             
                 elif event.type == pygame.KEYDOWN:
                     match event.key:
-                        case pygame.K_c:
-                            if getBallValue() < 200:
-                                setBallValue(getBallValue() + 5)
-                        case pygame.K_v:
-                            if getBallValue() > 5:
-                                setBallValue(getBallValue() - 5)
+                        #case pygame.K_v:
+                        #    increaseBallValue()
+                        #case pygame.K_c:
+                        #    if getBallValue() > 5:
+                        #        decreaseBallValue()
                         case pygame.K_SPACE:
-                            if getMoney() >= getBallValue():
-                                random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
-                                click.play()
-                                self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
-                                self.ball_group.add(self.ball)
-                        case pygame.K_b:
-                            self.ammount = round(getMoney() / getBallValue())
-                            click.play()
-                            for i in range(self.ammount):
-                                random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
-                                self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
-                                self.ball_group.add(self.ball)
+                            if self.ball_group.spritedict.values() == []:
+                                for i in range(getBallAmount()):
+                                    random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
+                                    click.play()
+                                    self.ball = Ball((random_x, 20), self.space, self.board, self.delta_time, getBallValue())
+                                    self.ball_group.add(self.ball)
+                        
 
                     
 

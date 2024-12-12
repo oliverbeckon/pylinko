@@ -60,10 +60,6 @@ class Ball(pygame.sprite.Sprite):
                 multi.animate(multi.color, multi.multi_amt)
                 multi.is_animating = True
 
-                # Display previous multi on right side of screen
-                prev_rgb = multi.color
-                prev_multi = PrevMulti(str(multi.multi_amt), prev_rgb)
-                prev_multi_group.add(prev_multi)
                 self.kill()
         
         # Draw red ball

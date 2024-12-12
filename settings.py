@@ -5,8 +5,8 @@ FPS = 60
 
 # Game config
 STARTER_MONEY = 100
-STARTER_BALLVAL = 1
-
+STARTER_BALLVAL = 5
+STARTER_BALLAMOUNT = 10
 
 
 # Maintain resolution regardless of Windows scaling settings
@@ -20,7 +20,6 @@ BG_COLOR = (16, 32, 45)
 MULTI_HEIGHT = int(HEIGHT / 19) # 56 on 1920x1080
 MULTI_COLLISION = HEIGHT - (MULTI_HEIGHT * 2) # 968 on 1920x1080
 
-SCORE_RECT = int(WIDTH / 16) # 120 on 1920x1080
 
 OBSTACLE_COLOR = "White"
 OBSTACLE_RAD = int(WIDTH / 240) # 8 on 1920x1080
@@ -31,6 +30,13 @@ segmentA_2 = OBSTACLE_START
 BALL_RAD = 16
 
 
+chip_Value = {
+  1: 5,
+  2: 10,
+  0: 25,
+}
+
+
 
 # RGB Values for multipliers
 multi_rgb = {
@@ -38,7 +44,7 @@ multi_rgb = {
     (1, 12): (255, 30, 0),
     (2, 6): (255, 60, 0),
     (3, 4): (255, 90, 0),
-    (4, 1.5): (255, 120, 0),
+    (4, 2): (255, 120, 0),
     (5, 0.5): (255, 150, 0),
     (6, 0.2): (255, 180, 0),
     (7, 0.1): (255, 210, 0),
@@ -46,7 +52,7 @@ multi_rgb = {
     (9, 0.1): (255, 210, 0),
     (10, 0.2): (255, 180, 0),
     (11, 0.5): (255, 150, 0),
-    (12, 1.5): (255, 120, 0),
+    (12, 2): (255, 120, 0),
     (13, 4): (255, 90, 0),
     (14, 6): (255, 60, 0),
     (15, 12): (255, 30, 0),
