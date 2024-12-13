@@ -6,6 +6,36 @@ ballValue = 0
 ballValueIndex = 0
 ballAmount = 0
 
+
+  
+
+
+playerBalls = []
+
+class ballStats():
+    def __init__(self, value, type = balls.Normal, isDuped = False) -> None:
+      self.value = value
+      self.type = type
+      self.isDuped = isDuped
+
+    def getValue(self):
+      return self.value
+    
+    def getType(self):
+      return self.type
+
+    def getIsDuped(self):
+      return self.isDuped
+
+
+for i in range(STARTER_BALLAMOUNT):
+  playerBalls.append(ballStats(STARTER_BALLVAL))
+
+
+def getBalls() -> list:
+  global playerBalls
+  return playerBalls
+
 def playerInit() -> None:
   global money, ballValue, ballValueIndex, ballAmount
   money = STARTER_MONEY

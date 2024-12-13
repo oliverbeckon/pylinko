@@ -25,8 +25,6 @@ class Ball(pygame.sprite.Sprite):
         self.font = pygame.font.SysFont('Comic Sans MS', 20)
 
         self.value = value
-        
-        addMoney(-value)
 
     def update(self):
         pos_x, pos_y = int(self.body.position.x), int(self.body.position.y)

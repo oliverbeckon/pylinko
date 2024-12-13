@@ -1,10 +1,9 @@
-from ball import Ball
+
 from board import *
 from multis import *
 from settings import *
 import ctypes, pygame, pymunk, random, sys, math
 from playerAtr import *
-
 
 # Maintain resolution regardless of Windows scaling settings
 ctypes.windll.user32.SetProcessDPIAware()
@@ -51,7 +50,8 @@ class Game:
                         #    if getBallValue() > 5:
                         #        decreaseBallValue()
                         case pygame.K_SPACE:
-                            if self.ball_group.spritedict.values() == []:
+                           
+                            if not self.ball_group.sprites():
                                 for i in range(getBallAmount()):
                                     random_x = WIDTH//2 + random.choice([random.randint(-20, -1), random.randint(1, 20)])
                                     click.play()

@@ -1,4 +1,4 @@
-import ctypes, pygame, pymunk
+import ctypes, pygame, pymunk, enum
 
 TITLE_STRING = 'Plinko'
 FPS = 60
@@ -36,6 +36,11 @@ chip_Value = {
   0: 25,
 }
 
+class balls(enum.Enum):
+    Normal = 0
+    Golden = 1
+    Charging = 2
+
 
 
 # RGB Values for multipliers
@@ -57,6 +62,7 @@ multi_rgb = {
     (14, 6): (255, 60, 0),
     (15, 12): (255, 30, 0),
     (16, 20): (255, 0, 0),
+    
 }
 
 # Number of multipliers shown underneath obstacles
